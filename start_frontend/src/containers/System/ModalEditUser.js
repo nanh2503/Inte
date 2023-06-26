@@ -6,7 +6,7 @@ import { Modal, Button, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { emitter } from '../../utils/emitter';
 import './ModalEditUser.scss';
 import { LANGUAGES, CommonUtils } from '../../utils';
-import { changeLanguageApp } from '../../store/actions';
+import { changeLanguageApp } from '../../redux/store/actions';
 import _ from 'lodash';     //work with array more easily
 import { Buffer } from 'buffer';
 
@@ -18,10 +18,12 @@ class ModalEditUser extends Component {
             id: '',
             email: '',
             password: '',
-            fullname: '',
-            code: '',
-            node: '',
-            phonenum: '',
+            fullName: '',
+            gender: '',
+            dateOfBirth: '',
+            major: '',
+            address: '',
+            phoneNum: '',
             isOpen: false,
             image: '',
             previewImgURL: '',
@@ -47,10 +49,12 @@ class ModalEditUser extends Component {
                 id: users.id,
                 email: users.email,
                 password: 'hashcode',
-                fullname: users.fullname,
-                code: users.code,
-                node: users.node,
-                phonenum: users.phonenum,
+                fullName: users.fullName,
+                gender: users.gender,
+                dateOfBirth: users.dateOfBirth,
+                major: users.major,
+                address: users.address,
+                phoneNum: users.phoneNum,
                 image: '',
                 previewImgURL: imageBase64
             })
@@ -81,7 +85,7 @@ class ModalEditUser extends Component {
     /**check validity of input */
     checkValidInput = () => {
         let isValid = true;
-        let arrInput = ['email', 'password', 'fullname', 'code', 'node', 'phonenum'];
+        let arrInput = ['email', 'password', 'fullName', 'code', 'node', 'phonenum'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -132,12 +136,19 @@ class ModalEditUser extends Component {
                 <ModalBody>
                     <div className='modal-users-body'>
                         <div className='input-container'>
+                            <label>ID</label>
+                            <input
+                                type="text"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "id") }}
+                                value={this.state.id}
+                            />
+                        </div>
+                        <div className='input-container'>
                             <label>Email</label>
                             <input
                                 type="text"
                                 onChange={(event) => { this.hanleOnChangeInput(event, "email") }}
                                 value={this.state.email}
-                                disabled        //không sửa được email
                             />
                         </div>
                         <div className='input-container'>
@@ -146,39 +157,54 @@ class ModalEditUser extends Component {
                                 type="password"
                                 onChange={(event) => { this.hanleOnChangeInput(event, "password") }}
                                 value={this.state.password}
-                                disabled        //không sửa được password
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.fullname" /></label>
+                            <label><FormattedMessage id="homeheader.fullName" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "fullname") }}
-                                value={this.state.fullname}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "fullName") }}
+                                value={this.state.fullName}
+                            />
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.gender" /></label>
+                            <select name="gender">
+                                <option value='' hidden></option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                            </select>
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.dateOfBirth" /></label>
+                            <input
+                                type="date"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "dateOfBirth") }}
+                                value={this.state.dateOfBirth}
+                            />
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.major" /></label>
+                            <input
+                                type="text"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "major") }}
+                                value={this.state.major}
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.code" /></label>
+                            <label><FormattedMessage id="homeheader.address" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "code") }}
-                                value={this.state.code}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "address") }}
+                                value={this.state.address}
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.node" /></label>
+                            <label><FormattedMessage id="homeheader.phoneNum" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "node") }}
-                                value={this.state.node}
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.phone" /></label>
-                            <input
-                                type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "phonenum") }}
-                                value={this.state.phonenum}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "phoneNum") }}
+                                value={this.state.phoneNum}
                             />
                         </div>
                         <div className='col-6'>

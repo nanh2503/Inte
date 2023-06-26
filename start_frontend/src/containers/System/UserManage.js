@@ -6,7 +6,7 @@ import { getAllUsers, createNewUserService, deleteUserService, editUserService }
 import ModalUser from './ModalUser';
 import { emitter } from '../../utils/emitter';
 import ModalEditUser from './ModalEditUser';
-import { changeLanguageApp } from '../../store/actions';
+import { changeLanguageApp } from '../../redux/store/actions';
 import { toast } from 'react-toastify';
 
 class UserManage extends Component {
@@ -162,11 +162,15 @@ class UserManage extends Component {
                     <div className='users-table mt-3 mx-3'>
                         <table id="customers">
                             <tr>
+                                <th>ID</th>
                                 <th>Email</th>
-                                <th><FormattedMessage id="homeheader.fullname" /></th>
-                                <th><FormattedMessage id="homeheader.phone" /></th>
-                                <th><FormattedMessage id="homeheader.code" /></th>
-                                <th><FormattedMessage id="homeheader.node" /></th>
+                                <th><FormattedMessage id="homeheader.fullName" /></th>
+                                <th><FormattedMessage id="homeheader.password" /></th>
+                                <th><FormattedMessage id="homeheader.gender" /></th>
+                                <th><FormattedMessage id="homeheader.dateOfBirth" /></th>
+                                <th><FormattedMessage id="homeheader.major" /></th>
+                                <th><FormattedMessage id="homeheader.address" /></th>
+                                <th><FormattedMessage id="homeheader.phoneNum" /></th>
                                 <th><FormattedMessage id="homeheader.action" /></th>
 
                             </tr>
@@ -175,11 +179,15 @@ class UserManage extends Component {
                                 arrUsers && arrUsers.map((item, index) => {
                                     return (
                                         <tr>
+                                            <td>{item.id}</td>
                                             <td>{item.email}</td>
-                                            <td>{item.fullname}</td>
-                                            <td>{item.phonenum}</td>
-                                            <td>{item.code}</td>
-                                            <td>{item.node}</td>
+                                            <td>{item.fullName}</td>
+                                            <td>{item.password}</td>
+                                            <td>{item.gender}</td>
+                                            <td>{item.dateOfBirth}</td>
+                                            <td>{item.major}</td>
+                                            <td>{item.address}</td>
+                                            <td>{item.phoneNum}</td>
                                             <td>
                                                 <button className='btn-edit' onClick={() => this.handleEditUser(item)}><i className="fas fa-pencil-alt"></i></button>
                                                 <button className='btn-delete' onClick={() => this.handleDeleteUser(item)}><i className="fas fa-trash-alt"></i></button>

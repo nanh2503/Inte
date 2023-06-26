@@ -5,10 +5,11 @@ import './styles/styles.scss';
 
 import App from './containers/App';
 import IntlProviderWrapper from "./hoc/IntlProviderWrapper";
-
+import counter from './redux/slices/counter'
 
 import { Provider } from 'react-redux';
-import reduxStore, { persistor } from './redux';
+import reduxStore, { persistor } from './redux/redux';
+import { store } from './redux/store'
 
 const renderApp = () => {
   ReactDOM.render(

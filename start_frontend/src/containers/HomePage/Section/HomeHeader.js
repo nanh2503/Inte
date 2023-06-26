@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from "../../../utils";
-import { changeLanguageApp } from "../../../store/actions";
+import { changeLanguageApp } from "../../../redux/store/actions";
 import { getAllUsers } from '../../../services/userService';
-import * as actions from "../../../store/actions";
+import * as actions from "../../../redux/store/actions";
 import UserManage from '../../System/UserManage';
 import { Buffer } from 'buffer';
 import _ from 'lodash';     //work with array more easily
@@ -102,7 +102,7 @@ class HomeHeader extends Component {
                         ></div>
 
                         <div className='name'>
-                            {userInfo && userInfo.fullname ? userInfo.fullname : ''}
+                            {userInfo && userInfo.fullName ? userInfo.fullName : ''}
                         </div>
 
                         <div className={language === LANGUAGES.VI ? 'language-vi active' : 'language-vi'}

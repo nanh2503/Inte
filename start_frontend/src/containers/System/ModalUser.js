@@ -6,7 +6,7 @@ import { Modal, Button, ModalBody, ModalFooter, ModalHeader } from 'reactstrap';
 import { emitter } from '../../utils/emitter';
 import './ModalUser.scss';
 import { LANGUAGES, CommonUtils } from '../../utils';
-import { changeLanguageApp } from '../../store/actions';
+import { changeLanguageApp } from '../../redux/store/actions';
 
 class ModalUser extends Component {
     /**initialize the variables*/
@@ -15,10 +15,12 @@ class ModalUser extends Component {
         this.state = {
             email: '',
             password: '',
-            fullname: '',
-            code: '',
-            node: '',
-            phonenum: '',
+            fullName: '',
+            gender: '',
+            dateOfBirth: '',
+            major: '',
+            address: '',
+            phoneNum: '',
             isOpen: false,
             image: '',
             previewImgURL: '',
@@ -41,10 +43,12 @@ class ModalUser extends Component {
             this.setState({
                 email: '',
                 password: '',
-                fullname: '',
-                code: '',
-                node: '',
-                phonenum: '',
+                fullName: '',
+                gender: '',
+                dateOfBirth: '',
+                major: '',
+                address: '',
+                phoneNum: '',
                 previewImgURL: '',
                 image: '',
 
@@ -79,7 +83,7 @@ class ModalUser extends Component {
     /**check validity of input */
     checkValidInput = () => {
         let isValid = true;
-        let arrInput = ['email', 'password', 'fullname', 'code', 'node', 'phonenum'];
+        let arrInput = ['id', 'email', 'password', 'fullName', 'gender', 'dateOdBirth', 'major', 'address', 'phoneNum'];
         for (let i = 0; i < arrInput.length; i++) {
             if (!this.state[arrInput[i]]) {
                 isValid = false;
@@ -132,6 +136,14 @@ class ModalUser extends Component {
                 <ModalBody>
                     <div className='modal-users-body'>
                         <div className='input-container'>
+                            <label>ID</label>
+                            <input
+                                type="text"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "id") }}
+                                value={this.state.id}
+                            />
+                        </div>
+                        <div className='input-container'>
                             <label>Email</label>
                             <input
                                 type="text"
@@ -148,35 +160,51 @@ class ModalUser extends Component {
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.fullname" /></label>
+                            <label><FormattedMessage id="homeheader.fullName" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "fullname") }}
-                                value={this.state.fullname}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "fullName") }}
+                                value={this.state.fullName}
+                            />
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.gender" /></label>
+                            <select name="gender">
+                                <option value='' hidden></option>
+                                <option value='Male'>Male</option>
+                                <option value='Female'>Female</option>
+                            </select>
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.dateOfBirth" /></label>
+                            <input
+                                type="date"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "dateOfBirth") }}
+                                value={this.state.dateOfBirth}
+                            />
+                        </div>
+                        <div className='choice'>
+                            <label><FormattedMessage id="homeheader.major" /></label>
+                            <input
+                                type="text"
+                                onChange={(event) => { this.hanleOnChangeInput(event, "major") }}
+                                value={this.state.major}
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.code" /></label>
+                            <label><FormattedMessage id="homeheader.address" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "code") }}
-                                value={this.state.code}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "address") }}
+                                value={this.state.address}
                             />
                         </div>
                         <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.node" /></label>
+                            <label><FormattedMessage id="homeheader.phoneNum" /></label>
                             <input
                                 type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "node") }}
-                                value={this.state.node}
-                            />
-                        </div>
-                        <div className='input-container'>
-                            <label><FormattedMessage id="homeheader.phone" /></label>
-                            <input
-                                type="text"
-                                onChange={(event) => { this.hanleOnChangeInput(event, "phonenum") }}
-                                value={this.state.phonenum}
+                                onChange={(event) => { this.hanleOnChangeInput(event, "phoneNum") }}
+                                value={this.state.phoneNum}
                             />
                         </div>
                         <div className='col-6'>

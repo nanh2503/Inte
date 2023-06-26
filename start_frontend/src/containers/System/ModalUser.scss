@@ -28,5 +28,11 @@
       padding: 0 10px;    //khoảng cách text-input với lề
     }
   }
+  .choice{
+    display: flex;
+    flex-direction: column;
+    width: 28%;
+    margin-left: 10px;
+  }
   }
 }
